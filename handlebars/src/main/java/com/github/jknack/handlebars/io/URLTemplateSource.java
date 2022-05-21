@@ -132,7 +132,6 @@ public class URLTemplateSource extends AbstractTemplateSource {
       }
       return uc.getLastModified();
     } catch (IOException ex) {
-      Handlebars.warn("Can't get last modified date of: %s", resource);
       return -1;
     } finally {
       try {
@@ -145,7 +144,6 @@ public class URLTemplateSource extends AbstractTemplateSource {
           }
         }
       } catch (IOException e) {
-        Handlebars.warn("Can't close: %s", resource);
       }
     }
   }

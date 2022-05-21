@@ -24,8 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.github.jknack.handlebars.Parser;
 import com.github.jknack.handlebars.Template;
@@ -38,11 +36,6 @@ import com.github.jknack.handlebars.io.TemplateSource;
  * @since 0.1.0
  */
 public class ConcurrentMapTemplateCache implements TemplateCache {
-
-  /**
-   * The logging system.
-   */
-  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   /**
    * The map cache.
@@ -107,17 +100,14 @@ public class ConcurrentMapTemplateCache implements TemplateCache {
   private Template cacheGet(final TemplateSource source, final Parser parser) throws IOException {
     Pair<TemplateSource, Template> entry = cache.get(source);
     if (entry == null) {
-      logger.debug("Loading: {}", source);
       entry = Pair.of(source, parser.parse(source));
       cache.put(source, entry);
     } else if (reload && source.lastModified() != entry.getKey().lastModified()) {
       // remove current entry.
       evict(source);
-      logger.debug("Reloading: {}", source);
       entry = Pair.of(source, parser.parse(source));
       cache.put(source, entry);
     } else {
-      logger.debug("Found in cache: {}", source);
     }
     return entry.getValue();
   }

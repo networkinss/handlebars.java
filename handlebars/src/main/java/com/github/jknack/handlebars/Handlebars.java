@@ -20,7 +20,6 @@ package com.github.jknack.handlebars;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
-import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,8 +39,6 @@ import java.util.Set;
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-
-import org.slf4j.Logger;
 
 import com.github.jknack.handlebars.cache.NullTemplateCache;
 import com.github.jknack.handlebars.cache.TemplateCache;
@@ -307,12 +304,7 @@ public class Handlebars implements HelperRegistry {
    */
   public static final String DELIM_END = "}}";
 
-  /**
-   * The logging system.
-   */
-  private static final Logger logger = getLogger(Handlebars.class);
-
-  /**
+   /**
    * The template loader. Required.
    */
   private TemplateLoader loader;
@@ -1396,94 +1388,7 @@ public class Handlebars implements HelperRegistry {
     return parserFactory;
   }
 
-  /**
-   * Log the given message and format the message within the args.
-   *
-   * @param message The log's message.
-   * @param args The optional args.
-   * @see String#format(String, Object...)
-   */
-  public static void log(final String message, final Object... args) {
-    logger.info(String.format(message, args));
-  }
-
-  /**
-   * Log the given message and format the message within the args.
-   *
-   * @param message The log's message.
-   * @see String#format(String, Object...)
-   */
-  public static void log(final String message) {
-    logger.info(message);
-  }
-
-  /**
-   * Log the given message as warn and format the message within the args.
-   *
-   * @param message The log's message.
-   * @param args The optional args.
-   * @see String#format(String, Object...)
-   */
-  public static void warn(final String message, final Object... args) {
-    if (logger.isWarnEnabled()) {
-      logger.warn(String.format(message, args));
-    }
-  }
-
-  /**
-   * Log the given message as warn and format the message within the args.
-   *
-   * @param message The log's message.
-   * @see String#format(String, Object...)
-   */
-  public static void warn(final String message) {
-    logger.warn(message);
-  }
-
-  /**
-   * Log the given message as debug and format the message within the args.
-   *
-   * @param message The log's message.
-   * @param args The optional args.
-   * @see String#format(String, Object...)
-   */
-  public static void debug(final String message, final Object... args) {
-    if (logger.isDebugEnabled()) {
-      logger.debug(String.format(message, args));
-    }
-  }
-
-  /**
-   * Log the given message as debug and format the message within the args.
-   *
-   * @param message The log's message.
-   * @see String#format(String, Object...)
-   */
-  public static void debug(final String message) {
-    logger.debug(message);
-  }
-
-  /**
-   * Log the given message as error and format the message within the args.
-   *
-   * @param message The log's message.
-   * @param args The optional args.
-   * @see String#format(String, Object...)
-   */
-
-  public static void error(final String message, final Object... args) {
-    logger.error(String.format(message, args));
-  }
-
-  /**
-   * Log the given message as error and format the message within the args.
-   *
-   * @param message The log's message.
-   * @see String#format(String, Object...)
-   */
-  public static void error(final String message) {
-    logger.error(message);
-  }
+ 
 
   @Override
   public Decorator decorator(final String name) {

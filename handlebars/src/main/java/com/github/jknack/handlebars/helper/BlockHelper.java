@@ -71,7 +71,6 @@ public class BlockHelper implements Helper<Object> {
         template = options.handlebars.compile(path);
       } catch (IOException ex) {
         // assume partial not found
-        Handlebars.debug(ex.getMessage());
         template = options.fn;
       }
     }

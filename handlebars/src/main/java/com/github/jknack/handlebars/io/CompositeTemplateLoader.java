@@ -24,9 +24,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * <p>
  * Combine two or more {@link TemplateLoader} as a single {@link TemplateLoader}.
@@ -46,11 +43,6 @@ import org.slf4j.LoggerFactory;
  * @since 1.0.0
  */
 public class CompositeTemplateLoader implements TemplateLoader {
-
-  /**
-   * The logging system.
-   */
-  private static final Logger logger = LoggerFactory.getLogger(CompositeTemplateLoader.class);
 
   /**
    * The template loader list.
@@ -74,7 +66,6 @@ public class CompositeTemplateLoader implements TemplateLoader {
         return delegate.sourceAt(location);
       } catch (IOException ex) {
         // try next loader in the chain.
-        logger.trace("Unable to resolve: {}, trying next loader in the chain.", location);
       }
     }
     throw new FileNotFoundException(location);
@@ -88,7 +79,6 @@ public class CompositeTemplateLoader implements TemplateLoader {
         return delegate.resolve(location);
       } catch (IOException ex) {
         // try next loader in the chain.
-        logger.trace("Unable to resolve: {}, trying next loader in the chain.", location);
       }
     }
     throw new IllegalStateException("Can't resolve: '" + location + "'");

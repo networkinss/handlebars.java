@@ -31,8 +31,6 @@ import org.antlr.v4.runtime.atn.PredictionMode;
 import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Parser;
@@ -47,11 +45,6 @@ import com.github.jknack.handlebars.io.TemplateSource;
  * @since 0.10.0
  */
 public class HbsParserFactory implements ParserFactory {
-
-  /**
-   * The logging system.
-   */
-  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   /**
    * Creates a new {@link Parser}.
@@ -69,7 +62,6 @@ public class HbsParserFactory implements ParserFactory {
 
       @Override
       public Template parse(final TemplateSource source) throws IOException {
-        logger.debug("About to parse: {}", source);
         String sourceName = source.filename();
         final ANTLRErrorListener errorReporter = new HbsErrorReporter(sourceName);
 
@@ -83,18 +75,15 @@ public class HbsParserFactory implements ParserFactory {
         final HbsParser parser = newParser(lexer);
         configure(parser, errorReporter);
 
-        logger.debug("Building AST");
         // 3. Parse
         ParseTree tree = parser.template();
 
         // remove unnecessary spaces and new lines?
         if (handlebars.prettyPrint()) {
-          logger.debug("Applying Mustache spec");
           new ParseTreeWalker().walk(new MustacheSpec(), tree);
         }
         
         if (lexer.whiteSpaceControl) {
-          logger.debug("Applying white spaces control");
           new ParseTreeWalker().walk(new WhiteSpaceControl((CommonTokenStream)parser.getTokenStream()), tree);
         }
 
@@ -109,7 +98,6 @@ public class HbsParserFactory implements ParserFactory {
             errorReporter.syntaxError(parser, offendingToken, line, column, message, null);
           }
         };
-        logger.debug("Creating templates");
         Template template = builder.visit(tree);
         return template;
       }

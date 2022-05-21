@@ -39,9 +39,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.jknack.handlebars.Decorator;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
@@ -58,9 +55,6 @@ import javax.script.ScriptEngineManager;
  * @since 1.2.0
  */
 public class DefaultHelperRegistry implements HelperRegistry {
-
-  /** The logging system. */
-  private final Logger logger = LoggerFactory.getLogger(HelperRegistry.class);
 
   /**
    * The JavaScript helpers environment for Rhino.
@@ -111,9 +105,6 @@ public class DefaultHelperRegistry implements HelperRegistry {
     notNull(helper, "A helper is required.");
 
     Helper<?> oldHelper = helpers.put(name, helper);
-    if (oldHelper != null) {
-      logger.debug("Helper '{}' has been replaced by '{}'", name, helper);
-    }
     return this;
   }
 
@@ -264,7 +255,6 @@ public class DefaultHelperRegistry implements HelperRegistry {
     registry.registerHelper("i18n", I18nHelper.i18n);
     registry.registerHelper("i18nJs", I18nHelper.i18nJs);
     registry.registerHelper(LookupHelper.NAME, LookupHelper.INSTANCE);
-    registry.registerHelper(LogHelper.NAME, LogHelper.INSTANCE);
 
     // decorator
     registry.registerDecorator("inline", InlineDecorator.INSTANCE);
@@ -282,9 +272,6 @@ public class DefaultHelperRegistry implements HelperRegistry {
     notNull(decorator, "A decorator is required.");
 
     Decorator old = decorators.put(name, decorator);
-    if (old != null) {
-      logger.warn("Decorator '{}' has been replaced by '{}'", name, decorator);
-    }
     return this;
   }
 

@@ -28,8 +28,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.github.jknack.handlebars.HandlebarsException;
 import com.github.jknack.handlebars.Parser;
@@ -43,11 +41,6 @@ import com.github.jknack.handlebars.io.TemplateSource;
  * @since 0.11.0
  */
 public class HighConcurrencyTemplateCache implements TemplateCache {
-
-  /**
-   * The logging system.
-   */
-  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   /**
    * The map cache.
@@ -121,14 +114,11 @@ public class HighConcurrencyTemplateCache implements TemplateCache {
         Future<Pair<TemplateSource, Template>> future = cache.get(source);
         try {
           if (future == null) {
-            logger.debug("Loading: {}", source);
             future = putIfAbsent(source, futureTask);
           } else if (reload && source.lastModified() != future.get().getKey().lastModified()) {
             evict(source);
-            logger.debug("Reloading: {}", source);
             future = putIfAbsent(source, futureTask);
           } else {
-            logger.debug("Found in cache: {}", source);
           }
           Pair<TemplateSource, Template> entry = future.get();
           return entry.getValue();
