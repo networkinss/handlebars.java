@@ -17,9 +17,6 @@
  */
 package com.github.jknack.handlebars.io;
 
-import static org.apache.commons.lang3.Validate.notEmpty;
-import static org.apache.commons.lang3.Validate.notNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +27,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
-import com.github.jknack.handlebars.Handlebars;
+import static org.apache.commons.lang3.Validate.notEmpty;
+import static org.apache.commons.lang3.Validate.notNull;
 
 /**
  * An {@link URL} {@link TemplateSource}.

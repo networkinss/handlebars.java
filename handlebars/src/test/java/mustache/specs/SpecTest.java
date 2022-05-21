@@ -54,15 +54,12 @@ public abstract class SpecTest {
       for (int i = 0; i < size; i++) {
         buffer.append("*");
       }
-      Handlebars.log(buffer.toString());
     }
 
     public void append(final Object message) {
-      Handlebars.log(message == null ? "" : message.toString());
     }
 
     public void append(final Object message, final Object... arguments) {
-      Handlebars.log(message == null ? "" : message.toString(), arguments);
     }
 
   }
@@ -177,7 +174,6 @@ public abstract class SpecTest {
       report.append("OUTPUT:");
       report.append(output);
     } catch (HandlebarsException ex) {
-      Handlebars.error(ex.getMessage());
     } catch (ComparisonFailure ex) {
       report.append("FOUND:");
       report.append(ex.getActual());

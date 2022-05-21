@@ -25,7 +25,6 @@ public class InfiniteLoopTest {
     try {
       new Handlebars().compile(path).apply(new Object());
     } catch (HandlebarsException ex) {
-      Handlebars.log(ex.getMessage());
       throw ex;
     }
   }

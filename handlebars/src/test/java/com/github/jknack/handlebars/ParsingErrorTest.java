@@ -166,7 +166,6 @@ public class ParsingErrorTest extends AbstractTest {
       System.out.println(compiled);
       fail("An error is expected");
     } catch (HandlebarsException ex) {
-      Handlebars.log(ex.getMessage());
       throw ex;
     }
   }

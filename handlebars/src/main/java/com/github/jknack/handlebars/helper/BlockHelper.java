@@ -17,18 +17,17 @@
  */
 package com.github.jknack.handlebars.helper;
 
-import static org.apache.commons.lang3.Validate.isTrue;
+import com.github.jknack.handlebars.Context;
+import com.github.jknack.handlebars.Helper;
+import com.github.jknack.handlebars.Options;
+import com.github.jknack.handlebars.TagType;
+import com.github.jknack.handlebars.Template;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.github.jknack.handlebars.Context;
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Helper;
-import com.github.jknack.handlebars.Options;
-import com.github.jknack.handlebars.TagType;
-import com.github.jknack.handlebars.Template;
+import static org.apache.commons.lang3.Validate.isTrue;
 
 /**
  * <p>

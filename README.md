@@ -5,6 +5,8 @@
 Handlebars.java
 ===============
 ## Logic-less and semantic Mustache templates with Java
+This is a fork from https://inss.ch to remove all logging from the handlebars module.  
+They made problems with usage in Spring and can cause warning messages if dependency is not inserted.
 
 ```java
 Handlebars handlebars = new Handlebars();

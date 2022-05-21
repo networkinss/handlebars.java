@@ -58,7 +58,6 @@ public class InheritanceTest {
           + name + ".expected"));
       assertEquals(expected, result);
     } catch (HandlebarsException ex) {
-      Handlebars.error(ex.getMessage());
       throw ex;
     }
   }

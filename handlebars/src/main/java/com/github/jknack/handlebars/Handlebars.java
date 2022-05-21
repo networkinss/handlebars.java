@@ -17,10 +17,23 @@
  */
 package com.github.jknack.handlebars;
 
-import static org.apache.commons.lang3.Validate.isTrue;
-import static org.apache.commons.lang3.Validate.notEmpty;
-import static org.apache.commons.lang3.Validate.notNull;
+import com.github.jknack.handlebars.cache.NullTemplateCache;
+import com.github.jknack.handlebars.cache.TemplateCache;
+import com.github.jknack.handlebars.helper.DefaultHelperRegistry;
+import com.github.jknack.handlebars.helper.I18nHelper;
+import com.github.jknack.handlebars.internal.Files;
+import com.github.jknack.handlebars.internal.FormatterChain;
+import com.github.jknack.handlebars.internal.HbsParserFactory;
+import com.github.jknack.handlebars.internal.Throwing;
+import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
+import com.github.jknack.handlebars.io.CompositeTemplateLoader;
+import com.github.jknack.handlebars.io.StringTemplateSource;
+import com.github.jknack.handlebars.io.TemplateLoader;
+import com.github.jknack.handlebars.io.TemplateSource;
 
+import javax.script.Bindings;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,23 +49,9 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.script.Bindings;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
-import com.github.jknack.handlebars.cache.NullTemplateCache;
-import com.github.jknack.handlebars.cache.TemplateCache;
-import com.github.jknack.handlebars.helper.DefaultHelperRegistry;
-import com.github.jknack.handlebars.helper.I18nHelper;
-import com.github.jknack.handlebars.internal.Files;
-import com.github.jknack.handlebars.internal.FormatterChain;
-import com.github.jknack.handlebars.internal.HbsParserFactory;
-import com.github.jknack.handlebars.internal.Throwing;
-import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
-import com.github.jknack.handlebars.io.CompositeTemplateLoader;
-import com.github.jknack.handlebars.io.StringTemplateSource;
-import com.github.jknack.handlebars.io.TemplateLoader;
-import com.github.jknack.handlebars.io.TemplateSource;
+import static org.apache.commons.lang3.Validate.isTrue;
+import static org.apache.commons.lang3.Validate.notEmpty;
+import static org.apache.commons.lang3.Validate.notNull;
 
 /**
  * <p>
@@ -1387,8 +1386,6 @@ public class Handlebars implements HelperRegistry {
   public ParserFactory getParserFactory() {
     return parserFactory;
   }
-
- 
 
   @Override
   public Decorator decorator(final String name) {

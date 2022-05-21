@@ -74,7 +74,6 @@ public class HelperErrorTest extends AbstractTest {
       shouldCompileTo((String) source.get(uri), $, helpers, "must fail");
       throw new IllegalStateException("An error is expected");
     } catch (HandlebarsException ex) {
-      Handlebars.log(ex.getMessage());
       throw ex;
     }
   }
